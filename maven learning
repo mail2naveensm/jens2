@@ -57,6 +57,8 @@ this is how the directory structure will be there in maven [if you create maven 
 
 As mentioned above POM xml is the heart of the maven , it guides the maven project with what and how to do..
 
+url to know about pom  https://maven.apache.org/pom.html#Build
+
 Basic POM XML files consist of 
 1.	<project xmlns="http://maven.apache.org/POM/4.0.0"
 2.	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -115,6 +117,78 @@ One more example like combination of junit and checkstyle plugins
 
 Build - POM
 
+Build has two kinds of functions , They are the build element, that handles things like declaring your project's directory structure and managing plugins; and the reporting element,
+
+1 ) base build  declaring the folder and file paths like where to generate the jar or war files also we can instruct the maven build to look for specifically 
+
+Example of how to mentioning the target files..
+
+<build>
+  <defaultGoal>install</defaultGoal>
+  <directory>${basedir}/target</directory>
+  <finalName>${artifactId}-${version}</finalName>
+  <filters>
+    <filter>filters/filter1.properties</filter>
+  </filters>
+  ...
+</build>
+
+One more example of how to mention specifically to search for files
+
+<build>
+    ...
+    <resources>
+      <resource>
+        <targetPath>META-INF/plexus</targetPath>
+        <filtering>false</filtering>
+        <directory>${basedir}/src/main/plexus</directory>
+        <includes>
+          <include>configuration.xml</include>
+        </includes>
+        <excludes>
+          <exclude>**/*.properties</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <testResources>
+      ...
+    </testResources>
+    ...
+  </build>
+
+2) build plugin  looping the plugin under build
+
+Simple example
+
+<build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+	   </plugins>
+</build>
+
+By mentioning with the few specifications 
+
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.6</version>
+        <extensions>false</extensions>
+        <inherited>true</inherited>
+        <configuration>
+          <classifier>test</classifier>
+        </configuration>
+        <dependencies>...</dependencies>
+        <executions>...</executions>
+      </plugin>
+    </plugins>
+  </build>
 
 
 
