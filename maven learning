@@ -1,4 +1,4 @@
-Maven is a build tool , help to run the java program independently 
+Maven is a build tool , help to test and run the java program independently 
 
 Maven runs purely based on POM xml [project object model] , it stores the configuration details
 
@@ -190,8 +190,11 @@ By mentioning with the few specifications
     </plugins>
   </build>
 
+Still more there in POM files such as Developers , contributors, profile , Continuous integration management , SCM , Mailing , repositories we can refer that in the below url
+https://maven.apache.org/pom.html#Properties
 
 
+Maven Build cycle
 
 
 
