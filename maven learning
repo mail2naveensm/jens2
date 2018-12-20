@@ -1,0 +1,126 @@
+Maven is a build tool , help to run the java program independently 
+
+Maven runs purely based on POM xml [project object model] , it stores the configuration details
+
+Installation 
+
+Download the Binary zip archive  apache-maven-3.6.0-bin.zip file maven apache website
+Please note: it is open source , so no need to pay
+
+Configure the variable and path details in your environmental variable gui , before doing all this install java on your machine , because maven is completely based on java
+
+Start with maven
+
+Cross check your maven by checking the version 
+
+#mvn –version
+1.	Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T20:41:47+02:00)
+2.	Maven home: D:\apache-maven-3.6.0\bin\..
+3.	Java version: 1.8.0_161, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk1.8.0_161\jre
+4.	Default locale: nl_NL, platform encoding: Cp1252
+5.	OS name: "windows 7", version: "6.1", arch: "amd64", family: "windows"
+
+Use below command to create a project
+
+For example if you are running this in d:/firstproject path
+
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+explanation
+
+archetype:generate  creating a new archetype project
+groupId=com.mycompany.app   a unique naming schema for the Java's package
+artifactId=my-app  name of the jar file without version which we are going to create while executing the maven packages
+archetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4  informing maven what archetype to use to create the initial structure of the project. Maven looks it up from the archetypeCatalog.
+interactiveMode=false  no interactive with the maven
+
+You may test the newly compiled and packaged JAR with the following command:
+
+java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App  gives the output
+
+this is how the directory structure will be there in maven [if you create maven with this -DgroupId=com.mycompany.app -DartifactId=my-app]
+1.	my-app
+2.	|-- pom.xml
+3.	`-- src
+4.	|-- main
+5.	| `-- java
+6.	| `-- com
+7.	| `-- mycompany
+8.	| `-- app
+9.	| `-- App.java
+10.	`-- test
+11.	`-- java
+12.	`-- com
+13.	`-- mycompany
+14.	`-- app
+15.	`-- AppTest.java
+
+As mentioned above POM xml is the heart of the maven , it guides the maven project with what and how to do..
+
+Basic POM XML files consist of 
+1.	<project xmlns="http://maven.apache.org/POM/4.0.0"
+2.	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+3.	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+4.	http://maven.apache.org/xsd/maven-4.0.0.xsd">
+5.	<modelVersion>4.0.0</modelVersion>
+6.	 
+7.	<groupId> com.mycompany.app</groupId>
+8.	<artifactId>my-app</artifactId>
+9.	<version>1.0</version>
+10.	</project>
+
+If we use below command it will create a Default POM xml file like above ..
+
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+Dependencies - POM
+
+By default almost all java programs needs some dependencies , so maven downloads and links the dependencies on compilation . As an added bonus, Maven brings in the dependencies of those dependencies too .
+
+So go to maven repository using below url and search for your requirement and paste the same in your POM XML
+
+https://mvnrepository.com/
+
+such as here we need checkstyle plugin to check the complete code , checkstyle will give complete reports of your code warning and errors
+
+so just search in maven repository and get the dependency codes and paste in your pom xml , it will help to fetch the same from internet and helps to run your java program
+
+<dependency>
+    <groupId>com.puppycrawl.tools</groupId>
+    <artifactId>checkstyle</artifactId>
+    <version>8.12</version>
+</dependency>
+
+
+One more example like combination of junit and checkstyle plugins
+
+  <dependencies>
+    
+<dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <type>jar</type>
+      <scope>test</scope>
+      <optional>true</optional>
+    </dependency>
+
+<dependency>
+    <groupId>com.puppycrawl.tools</groupId>
+    <artifactId>checkstyle</artifactId>
+    <version>8.12</version>
+</dependency>
+
+  </dependencies>
+
+Build - POM
+
+
+
+
+
+
+
+Thanks,
+Naveen S M
+
