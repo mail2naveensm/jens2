@@ -1,0 +1,334 @@
+shell revise
+=============
+
+arch
+
+uname -m
+
+ifconfig bond0
+
+bash-4.1$ cat /etc/redhat-release 
+Red Hat Enterprise Linux Server release 6.9 (Santiago)
+
+bash-4.1$ uptime
+05:53:36 up 28 days,  4:42,  3 users,  load average: 0.05, 0.14, 0.14
+
+bash-4.1$ cat /etc/sysconfig/network-scripts/ifcfg-bond0 
+DEVICE=bond0
+IPADDR=162.124.128.103
+NETMASK=255.255.255.0
+GATEWAY=162.124.128.1
+ONBOOT=yes
+BOOTPROTO=none
+USERCTL=no
+
+
+
+
+Find Exec
+----------
+
+find .  -name '*.log' -size +2M -mtime +0 -exec ls -ltr {} \;
+-rw-r--r-- 1 ztktapp tktgrp 2677732 Apr 29  2015 ./ZTSServer_INST1_C1_20150429_012455_debug.log
+
+
+find . -type f     \( -name '*.log' \) -mtime +0 -exec ls -ltr {} \;
+
+-rw-r--r-- 1 ztktapp tktgrp 2677732 Apr 29  2015 ./ZTSServer_INST1_C1_20150429_012455_debug.log
+-rw-r--r-- 1 ztktapp tktgrp 153694 Apr 29  2015 ./ZTSServer_INST1_C1_20150429_012455_error.log
+-rw-r--r-- 1 ztktapp tktgrp 10774 Apr 29  2015 ./stop_ZTSServer_INST1_C1_20150429_023412_debug.log
+-rw-r--r-- 1 ztktapp tktgrp 1096 Apr 29  2015 ./stop_ZTSServer_INST1_C1_20150429_023412_error.log
+
+
+find . -size +2M -exec ls -ltr {} \;|awk '{print $9}'
+
+./15-04-29.01:24.22665.start_ztkt_svr.ZTSServer_INST1_C1
+./ZTSServer_INST1_C1_20150429_012455_debug.log
+
+Xargs
+-----
+
+find . -size +2M |xargs ls -ltr|awk '{print $9}'
+./ZTSServer_INST1_C1_20150429_012455_debug.log
+./15-04-29.01:24.22665.start_ztkt_svr.ZTSServer_INST1_C1
+
+
+xargs + cut
+------------
+
+bash-4.1$ find . -size +2M |xargs ls -ltr|awk '{print $9}'|cut -c 3-
+ZTSServer_INST1_C1_20150429_012455_debug.log
+15-04-29.01:24.22665.start_ztkt_svr.ZTSServer_INST1_C1
+
+
+
+
+grep -V -o -i file_name
+----
+
+Rpm –ivh/q/e/u
+---
+
+
+cut 
+****
+
+cat pass |cut -d: -f1
+cat pass |cut -c 1-5
+
+sed
+****
+
+based on range replace
+---------------------------
+bash-4.1$ cat pass |head -3
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+bash-4.1$
+
+bash-4.1$ sed '1,3 s/bin/sed/' pass |head -3
+root:x:0:0:root:/root:/sed/bash
+sed:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/ssed:/sbin/nologin
+
+spacific replacement 
+----------------------
+
+bash-4.1$ sed '3 s/nologin/change/' pass |head -5
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/change
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+
+Replacing from nth occurrence to all occurrences in a line
+---------------------------------------------
+$sed 's/unix/linux/3g' geekfile.txt
+
+special or regular Expression
+-------------------------
+bash-4.1$ cat pass |head -1
+root:x:0:0:root:/root:/bin/bash
+bash-4.1$ 
+bash-4.1$ sed 's/':'/'-'/g' pass |head -1
+root-x-0-0-root-/root-/bin/bash
+bash-4.1$ 
+
+
+
+nohup 
+------
+
+nohup ./test.sh
+
+
+RPM
+----
+
+i - install
+e - uninstall
+q - to check
+u - update
+
+
+loged in details
+----------------
+
+id
+whoami
+who
+finger
+
+ssh/scp
+----------
+
+ssh hostname
+scp file_name username@hostname:/path
+
+networking
+
+Ping -c2 
+----
+
+Tracert Ipadress
+-------
+
+nslookup google.com
+--------
+
+all details
+
+dig  google.com
+----
+
+domian details it will pick
+
+archieve
+*********
+
+gzip 
+
+bzip 
+
+tar -cvxf
+tar -xvcf
+
+zless
+zcat
+uzip file_name
+
+
+
+FTP/SFTP
+----------
+
+$ cd $HOME/testdir
+$ ls
+test1   test2   test3
+$ ftp pluto
+Connected to pluto.
+220 pluto FTP server (SunOS 5.8) ready.
+Name (pluto:kryten): kryten
+331 Password required for kryten.
+Password: xxx
+230 User kryten logged in.
+ftp> cd /tmp
+250 CWD command successful.
+ftp> mput test*
+mput test1? y
+200 PORT command successful.
+150 ASCII data connection for test1 (129.152.221.238,34365).
+226 Transfer complete.
+mput test2? y
+200 PORT command successful.
+150 ASCII data connection for test2 (129.152.221.238,34366).
+226 Transfer complete.
+mput test3? y
+200 PORT command successful.
+150 ASCII data connection for filef (129.152.221.238,34356).
+226 Transfer complete.
+ftp> bye
+221 Goodbye.
+
+
+
+
+
+
+clear screen
+echo enter the order id to search :
+read a
+clear screen
+echo Which logs to Pick :
+echo 1 Send To Ticketing logs
+echo 2 Send To Primo logs
+echo 3 Send To Source logs
+echo 4 Send To PrimeFinance logs
+echo 5 Send To CM logs
+echo choose your option by giving 1 to 5 number as per log requirement and press enter :
+read b
+if [ $b -eq 1 ]
+then
+cd /home/loghome/hkmogauat1v/norep-to-DR/moga/
+clear screen
+echo Please wait for a minute : searching log file
+grep -Rl $a *
+echo which file you want to pull the log data:
+read op
+clear screen
+grep $a $op|grep -i SendToTicketing       
+grep $a $op|grep -i SendToTicketing >/var/tmp/jn49034/out.txt
+mail -s "Send To Ticketing message on apac for Order id $a " jyoti.ranjan.nayak@citi.com </var/tmp/jn49034/out.txt
+elif [ $b -eq 2 ]
+then
+cd /home/loghome/hkmogauat1v/norep-to-DR/moga/
+clear screen
+echo Please wait for a minute : searching log file
+grep -Rl $a *
+echo which file you want to pull the log data:
+read op
+clear screen
+grep $a $op|grep -i SendToPrimo
+grep $a $op|grep -i SendToPrimo >/var/tmp/jn49034/out.txt
+mail -s "Send To Primo message on apac for Order id $a " jyoti.ranjan.nayak@citi.com </var/tmp/jn49034/out.txt
+elif [ $b -eq 3 ]
+then
+cd /home/loghome/hkmogauat1v/norep-to-DR/moga/
+clear screen
+echo Please wait for a minute : searching log file
+grep -Rl $a *
+echo which file you want to pull the log data:
+read op
+clear screen
+grep $a $op*|grep -i SendToSource
+grep $a $op|grep -i SendToSource >/var/tmp/jn49034/out.txt
+mail -s "Send To Source message on apac for Order id $a " jyoti.ranjan.nayak@citi.com </var/tmp/jn49034/out.txt
+elif [ $b -eq 4 ]
+then
+cd /home/loghome/hkmogauat1v/norep-to-DR/moga/
+clear screen
+echo Please wait for a minute : searching log file
+grep -Rl $a *
+echo which file you want to pull the log data:
+read op
+clear screen
+grep $a $op|grep -i SendToPrimeFinance
+grep $a $op|grep -i SendToPrimeFinance >/var/tmp/jn49034/out.txt
+mail -s "Send To PrimeFinance message on apac for Order id $a " jyoti.ranjan.nayak@citi.com </var/tmp/jn49034/out.txt
+elif [ $b -eq 5 ]
+then
+cd /home/loghome/hkmogauat1v/norep-to-DR/moga/
+clear screen
+echo Please wait for a minute : searching log file
+grep -Rl $a *
+echo which file you want to pull the log data:
+read op
+clear screen
+grep $a $op|grep -i SendToCM
+grep $a $op|grep -i SendToCM >/var/tmp/jn49034/out.txt
+mail -s "Send To CM message on apac for Order id $a " jyoti.ranjan.nayak@citi.com </var/tmp/jn49034/out.txt
+fi
+
+
+
+
+#!/bin/bash
+#Disk space clearance on Qa29
+#code_developer -Naveen sm
+#source : open to ALL
+DS1=`df -h /eqtpsqa29-2/export1| awk '{ print $4}'|tail -1`
+echo before disk space clearance the size is "$DS1" > /opt/eqmotbe/dsc.txt
+echo "-----------------------------------------------------" >> /opt/eqmotbe/dsc.txt
+echo "" >> /opt/eqmotbe/dsc.txt
+p1=/opt/loghome/PRIMOLogs/eqprimotg
+p2=/opt/loghome/PRIMOLogs/eqprimofa-exec
+p3=/opt/loghome/PRIMOLogs/eqprimotg-gui
+p4=/opt/loghome/PRIMOLogs/eqprimotg-mkt
+echo "" >> /opt/eqmotbe/dsc.txt
+echo "" >> /opt/eqmotbe/dsc.txt
+echo "below listed files archiving on current path folder" >> /opt/eqmotbe/dsc.txt
+echo "" >> /opt/eqmotbe/dsc.txt
+find $p1 -type f -size +200M \( -name '*.log.*' \) -exec ls -ltr {} \; >>/opt/eqmotbe/dsc.txt
+find $p2 -type f -size +200M \( -name '*.log.*' \) -exec ls -ltr {} \; >>/opt/eqmotbe/dsc.txt
+find $p3 -type f -size +200M \( -name '*.log.*' \) -exec ls -ltr {} \; >>/opt/eqmotbe/dsc.txt
+find $p4 -type f -size +200M \( -name '*.log.*' \) -exec ls -ltr {} \; >>/opt/eqmotbe/dsc.txt
+sleep 8
+find $p1 -type f -size +200M \( -name '*.log.*' \) -exec gzip -f {} \;
+find $p2 -type f -size +200M \( -name '*.log.*' \) -exec gzip -f {} \;
+find $p3 -type f -size +200M \( -name '*.log.*' \) -exec gzip -f {} \;
+find $p4 -type f -size +200M \( -name '*.log.*' \) -exec gzip -f {} \;
+sleep 1800
+echo "" >> /opt/eqmotbe/dsc.txt
+DS2=`df -h /eqtpsqa29-2/export1| awk '{ print $4}'|tail -1`
+echo afer disk space clearance the size is "$DS2" >> /opt/eqmotbe/dsc.txt
+date=$(date)
+echo "" >> /opt/eqmotbe/dsc.txt
+echo "" >> /opt/eqmotbe/dsc.txt
+echo "" >> /opt/eqmotbe/dsc.txt
+echo "-----------------------------------------------------" >> /opt/eqmotbe/dsc.txt
+echo Thanks >> /opt/eqmotbe/dsc.txt
+echo Naveen S M >> /opt/eqmotbe/dsc.txt
+echo $date >> /opt/eqmotbe/dsc.txt
+mail -s "Disk space clearance on Qa29 machine" ns90816@imcnam.ssmb.com < /opt/eqmotbe/dsc.txt
+
