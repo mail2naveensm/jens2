@@ -1,0 +1,214 @@
+commmand used
+===============
+
+$ git --version
+listing version details
+
+$ git config --list
+basic config details
+
+$ date
+
+$ git config --global user.name "naveen,sm"
+adding user name in the git config
+
+$ git config --global user.email "naveensmresume@gmail.com"
+adding user email in the git config
+
+$ git config --list
+listing the config table
+
+$ git config --global --list
+listing the congig global table
+
+$ cd e:/'Dev Ops'
+$ git init
+iniating the git process on the mention path
+
+$ git status
+status of the files
+
+$ git add .
+adding all files in the git / now the files will be in the staging area , waiting for commit
+
+$ git add test1.txt
+adding test1.txt files in the git / now the files will be in the staging area , waiting for commit
+
+$ git commit -m "commit1"
+commit all files , now all files in the local repositary but not yet pushed to github
+
+$ git commit -am "commited without add"
+commiting the file without adding but it works in excisting files , if we are creating a new file then first add it to the staging then above commit "-am" works
+
+$ git log
+listing the commit log history
+
+$ git help init
+$ git help
+information regarding the git commmands
+
+$ git log --author "naveen,sm"
+only the specific user commit log history it will list out
+
+$ git commit
+no need to give the commit message , it will ask by opening some editors such as notepad or subl or vi , there we need to mention the commit details
+
+$ gtit diff
+$ git diff --staged
+$ git diff a912362 43fbc25
+$ git diff HEAD HEAD
+difference between the files/ commit/stage and working area
+
+$ git rm test3.txt
+removing a file and it wont require commit , where as normal rm requires a add and commit
+
+$ git remote add origin https://github.com/mail2naveensm/centrailized.git
+register in github and do the connectivity from your local repostary to git hub[distrubuted git hub]
+
+$ git push origin master
+sending files from local to cental rep
+
+$ git pull origin master
+recieving files from local to cental rep
+
+$ git branch
+branch information , just like different types of user such as oracle , java dev , shell scripting , .. 
+
+$ git branch -a
+branch inforamtion regarding all user in the git rep
+
+$ git branch naveen
+creating a new branch
+
+$ git branch -m navroon naveen
+renaming the branch name from old to new
+
+$ git branch -d naveen
+deleting the branch from the git
+
+$ git checkout -b new_branch
+creating and switching into new branch directly
+
+$ git checkout naveen
+switching from one branch to another branch
+
+$ git merge naveen
+merging or adding the content from one branch to another branch
+
+$ git reset HEAD test5.txt
+reverting the changes in the test5.txt file , from commit to staging it will move
+
+$ git reset HEAD~
+reverting the last commit , local rep to working station
+
+$ git checkout -- humans.txt
+reverting the change in the particular file
+
+$ git clone https://github.com/mail2naveensm/starter-web.git
+try for your requirement from github and click on the fork option to bring the data to our central or distrubated repositary, 
+from there by cloning we can get the data into local rep
+
+$ git log --oneline --graph --decorate
+log details in decorate manner
+
+$ git log --since="5 days ago"
+commit log details for the last 5 days
+
+$ git show 6bd72df8acb16a97cbb84ef392e288a2458cf0be
+commit details based on commit id
+
+$ git show humans.txt
+details regarding the file 
+
+$ git config --global alias.loghistory "log --all --oneline --decorate --graph"
+simplyfying the command in easy manner by doing alias 
+
+$ git loghistory
+alies command trying on the git bash
+
+$ git stash
+to save a file but not want to comes under commit, like a temp save
+
+$ git stash list
+list the stash logs
+
+$ git stash apply
+to apply the stash into repo
+
+$ git stash drop
+dropping the stash
+
+$ git stash -u
+by default we cant add the new file into stash , so use -u to add into stash
+
+$ git stash -a
+suppose if any files in ignorable , then we can add that files also in stash [need to mention the ignnoable file in .gitignore]
+
+$ git stash pop
+to roll back teh stash changes one by one
+
+$ git stash save "change 2 in nav.txt"
+name or message for stash , just like cmommit message
+
+$ git stash apply stash@{1}
+applying teh stash into repo
+
+$ git stash show stash@{0}
+details regarding stash0
+
+$ git stash drop stash@{1}
+dropping the particular stash
+
+$ git stash clear
+clearing the stash 
+
+$ git stash branch new_branch
+transfer the stash files into other branch
+
+$ git tag checktag1.0.02
+creating a tag , tag is nothing but the added details to the commit , kind of mentioning the versioning the commit message
+
+$ git tag --delete checktag
+delete the tag
+
+$ git tag --list
+listing the tag
+
+$ git tag -a ver1.0.3
+adding information regarding the tag
+
+
+$ git show ver1.0.3
+description or explanation regarding the particular version tag
+
+$ git tag -a old_version  570ee13
+tagging the older commit
+
+$ git checkout nav.txt
+reverting the changes on the file
+
+$ git commit --amend -m "tag detailss check"
+adding new messge on last commmit
+
+$ git reset --soft e34d8df
+reverting the commit based om commit id and the file will be in staging area , ie waiting for commit 
+
+$ git reset e34d8df
+
+reverting the commit based om commit id and the file will be in working area , ie changes not staged
+
+$ git reset  --hard e34d8df
+reverting the commit based om commit id and the file will be in local repo , ie we can push to github
+
+$ git reflog
+complete details like what we did in git from day 1
+
+$ git checkout cbef86c
+reverting the commit based on commit id , suppose this commit id is not there in present git , then it will be copied in the latest branch
+
+$ git branch again_new_branch
+creating a new branch
+
+$ git checkout  again_new_branch
+
+moving into new branch
