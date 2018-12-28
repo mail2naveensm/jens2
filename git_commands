@@ -1,0 +1,75 @@
+git --version
+git config --list
+git config --global --list
+git config --global user.name "Naveen"
+
+git add .
+git commit
+git commit -m "no need to enter text"
+git commit -am "no need to add the file into staging"
+git commit --ammend -m "adding details on the last commit "
+
+git log
+git config --global alias.naveen "log --oneline --graph"
+git log --oneline --graph --decorate
+git log --author "naveen"
+git reflog
+
+git help init
+git init
+
+git diff
+git diff --staged
+git diff commit1 commit2
+git diff HEAD HEAD
+
+git rm abc.txt
+
+git remote add origin url of the github
+git push origin master
+git pull origin master
+git clone url
+
+git branch
+git branch -d deletebranch
+git branch -m naveen navroon
+git branch -a
+
+git checkout branch_name
+git checkout -b new_branch
+git checkout -- file_name_undo
+git checkout filename
+git checkout commit_id
+
+git merge naveen
+
+git reset HEAD file_name_to_do_undo_from_commit_to_staging
+git reset HEAD~
+
+
+git show commit_id
+git show file_name_details_to_know
+
+git stash
+git stash list
+git stash apply
+git stash drop
+git stash -u 
+git stash pop
+git stash save "like commit message"
+git stash apply stash@{0}
+git stash drop stash@{0}
+git stash clear
+git stash branch New_branch
+
+git tag name_version_1_2
+git tag --delete name_version_1_2
+git tag --list
+git tag -a name_version_1_2
+git show name_version_1_2
+git tag -a old_version commit_name
+
+
+git reset --soft commit_id
+git reset commit_id
+git reset --hard commit_id
