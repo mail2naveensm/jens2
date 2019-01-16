@@ -332,3 +332,41 @@ echo Naveen S M >> /opt/eqmotbe/dsc.txt
 echo $date >> /opt/eqmotbe/dsc.txt
 mail -s "Disk space clearance on Qa29 machine" ns90816@imcnam.ssmb.com < /opt/eqmotbe/dsc.txt
 
+
+#!/bin/bash
+clear screen
+
+echo enter a number :
+
+read a
+echo enter b number
+read b
+echo what you want to do
+echo press 1 for add
+echo press 2 for sub
+echo press 3 for div
+echo press 4 for mul
+sleep 3
+read z
+if [ $z -eq 1 ]
+then
+echo im going to add a and b
+c=$((a + b)) 
+echo outout is $c
+elif [ $z -eq 2 ]
+then
+echo im going to sub a and b
+c=$((a - b))
+echo outout is $c
+elif [ $z -eq 3 ]
+then
+echo im going to div a and b
+c=$((a / b))
+echo outout is $c
+elif [ $z -eq 4 ]
+then
+echo im going to mul a and b
+c=$((a * b))
+echo outout is $c
+fi
+
